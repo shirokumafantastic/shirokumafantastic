@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>シロクマファンタスティック — 読むコーヒー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #FAFAFA;
+      color: #222222;
+      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── 共通 ─── */
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    /* ─── ① ファーストビュー ─── */
+    #firstview {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0;
+      background-color: #FAFAFA;
+    }
+
+    #firstview .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    #firstview h1 {
+      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+      color: #222222;
+    }
+
+    #firstview p {
+      font-size: clamp(13px, 2vw, 15px);
+      font-weight: 300;
+      line-height: 1.9;
+      color: #666666;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── ② 共感ブロック ─── */
+    #empathy {
+      background-color: #FFFFFF;
+    }
+
+    #empathy .text-block {
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: 300;
+      line-height: 2.0;
+      color: #333333;
+      letter-spacing: 0.04em;
+    }
+
+    #empathy .text-block p {
+      margin-bottom: 1.6em;
+    }
+
+    #empathy .text-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    #empathy .text-block .em {
+      font-weight: 500;
+      color: #222222;
+    }
+
+    /* ─── ③ 問題→解決 ─── */
+    #problem {
+      background-color: #FAFAFA;
+    }
+
+    #problem .problem-text {
+      font-size: clamp(15px, 2.2vw, 18px);
+      font-weight: 300;
+      line-height: 2.0;
+      color: #444444;
+      margin-bottom: 64px;
+    }
+
+    #problem .problem-text p {
+      margin-bottom: 0.4em;
+    }
+
+    #problem .divider {
+      width: 40px;
+      height: 1px;
+      background-color: #CCCCCC;
+      margin: 48px 0;
+    }
+
+    #problem .solution-text {
+      font-size: clamp(15px, 2.2vw, 18px);
+      font-weight: 300;
+      line-height: 2.0;
+      color: #444444;
+    }
+
+    #problem .solution-text strong {
+      font-weight: 500;
+      color: #222222;
+    }
+
+    /* ─── ④ 5つの体験 ─── */
+    #experience {
+      background-color: #FFFFFF;
+    }
+
+    #experience .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: #999999;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+
+    #experience .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 48px;
+    }
+
+    @media (max-width: 480px) {
+      #experience .experience-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    .exp-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .exp-item .exp-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .exp-item .exp-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: #666666;
+      letter-spacing: 0.05em;
+    }
+
+    /* カテゴリカラー */
+    .color-forme  { color: #B8AEC8; }
+    .color-unlearn { color: #D8806A; }
+    .color-wonder { color: #C4A950; }
+    .color-now    { color: #4A6A7F; }
+    .color-us     { color: #7A9F74; }
+
+    /* ─── ⑤ セット導線 ─── */
+    #sets {
+      background-color: #FAFAFA;
+    }
+
+    #sets .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: #999999;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+
+    .set-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .set-card {
+      border: 1px solid #E8E8E8;
+      padding: 36px 40px;
+      background-color: #FFFFFF;
+    }
+
+    @media (max-width: 480px) {
+      .set-card {
+        padding: 28px 24px;
+      }
+    }
+
+    .set-card .set-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: #222222;
+      margin-bottom: 12px;
+    }
+
+    .set-card .set-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: #888888;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .set-card .set-items {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: #AAAAAA;
+      letter-spacing: 0.08em;
+      margin-bottom: 28px;
+    }
+
+    /* ─── ボタン ─── */
+    .btn {
+      display: inline-block;
+      background-color: #222222;
+      color: #FFFFFF;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      padding: 14px 40px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn:hover {
+      opacity: 0.75;
+    }
+
+    /* ─── ⑥ 単品導線 ─── */
+    #singles {
+      background-color: #FFFFFF;
+    }
+
+    #singles .section-intro {
+      font-size: 13px;
+      font-weight: 300;
+      color: #888888;
+      letter-spacing: 0.08em;
+      margin-bottom: 32px;
+    }
+
+    .single-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .single-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid #EEEEEE;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s ease;
+    }
+
+    .single-item:first-child {
+      border-top: 1px solid #EEEEEE;
+    }
+
+    .single-item:hover {
+      opacity: 0.6;
+    }
+
+    .single-item .item-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    .single-item .item-arrow {
+      font-size: 16px;
+      color: #CCCCCC;
+    }
+
+    /* ─── ⑦ 思想導線 ─── */
+    #philosophy {
+      background-color: #FAFAFA;
+      text-align: center;
+    }
+
+    #philosophy .phil-label {
+      font-size: 12px;
+      font-weight: 300;
+      color: #AAAAAA;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    #philosophy .phil-title {
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #222222;
+      margin-bottom: 16px;
+    }
+
+    #philosophy .phil-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: #888888;
+      letter-spacing: 0.06em;
+      margin-bottom: 36px;
+    }
+
+    /* ─── ⑧ クロージング ─── */
+    #closing {
+      background-color: #222222;
+      text-align: center;
+      padding: 120px 0;
+    }
+
+    #closing .closing-text {
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 300;
+      line-height: 2.2;
+      color: #FFFFFF;
+      letter-spacing: 0.06em;
+      margin-bottom: 60px;
+    }
+
+    #closing .closing-text strong {
+      font-weight: 500;
+    }
+
+    #closing .btn {
+      background-color: #FFFFFF;
+      color: #222222;
+    }
+
+    #closing .btn:hover {
+      opacity: 0.8;
+    }
+
+    /* ─── フッター ─── */
+    footer {
+      background-color: #222222;
+      border-top: 1px solid #333333;
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: #666666;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── スクロールアニメーション ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ① ファーストビュー -->
+  <section id="firstview">
+    <div class="container">
+      <h1>コーヒーは、飲み物じゃなかった。</h1>
+      <p>一杯のコーヒーが、<br>思考を変えることがある</p>
+    </div>
+  </section>
+
+  <!-- ② 共感ブロック -->
+  <section id="empathy">
+    <div class="container fade-in">
+      <div class="text-block">
+        <p>気づいたら、<br>だれかのために動いている。</p>
+        <p>正解を探して、<br>間違えないように選んでいる。</p>
+        <p class="em">でも——</p>
+        <p>その選択は、<br>本当に自分のものだろうか。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ 問題→解決 -->
+  <section id="problem">
+    <div class="container fade-in">
+      <div class="problem-text">
+        <p>人は、</p>
+        <p>自分に戻れず、<br>前提に縛られ、<br>答えを急ぎ、<br>動けなくなる。</p>
+        <p>だから、選べなくなる。</p>
+      </div>
+      <div class="divider"></div>
+      <div class="solution-text">
+        <p>シロクマファンタスティックは、</p>
+        <p>コーヒーを通して<br><strong>思考の流れを取り戻すブランド</strong>です。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 5つの体験 -->
+  <section id="experience">
+    <div class="container fade-in">
+      <p class="section-label">5 experiences</p>
+      <div class="experience-grid">
+        <div class="exp-item">
+          <span class="exp-name color-forme">for me.</span>
+          <span class="exp-desc">まず、じぶんに。</span>
+        </div>
+        <div class="exp-item">
+          <span class="exp-name color-unlearn">unlearn.</span>
+          <span class="exp-desc">あたりまえを、うたがう。</span>
+        </div>
+        <div class="exp-item">
+          <span class="exp-name color-wonder">wonder.</span>
+          <span class="exp-desc">といを、もつ。</span>
+        </div>
+        <div class="exp-item">
+          <span class="exp-name color-now">now.</span>
+          <span class="exp-desc">やるなら、いまだ。</span>
+        </div>
+        <div class="exp-item">
+          <span class="exp-name color-us">us.</span>
+          <span class="exp-desc">あなたと、わたしと。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ セット導線 -->
+  <section id="sets">
+    <div class="container fade-in">
+      <p class="section-label">sets</p>
+      <div class="set-cards">
+
+        <div class="set-card">
+          <div class="set-name">start. set</div>
+          <div class="set-desc">思考をリセットする3つの体験</div>
+          <div class="set-items">for me. / unlearn. / wonder.</div>
+          <p style="font-size:12px;color:#AAAAAA;font-weight:300;margin-bottom:24px;">どれから始めればいいかわからない人へ</p>
+          <a href="https://shirokumalab.base.shop/items/141941238" target="_blank" class="btn">体験する</a>
+        </div>
+
+        <div class="set-card">
+          <div class="set-name">move. set</div>
+          <div class="set-desc">考えて止まる人へ</div>
+          <div class="set-items">wonder. / now.</div>
+          <a href="https://shirokumalab.base.shop/items/141941491" target="_blank" class="btn">体験する</a>
+        </div>
+
+        <div class="set-card">
+          <div class="set-name">open. set</div>
+          <div class="set-desc">自分から世界へ</div>
+          <div class="set-items">for me. / us.</div>
+          <a href="https://shirokumalab.base.shop/items/141941926" target="_blank" class="btn">体験する</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ 単品導線 -->
+  <section id="singles">
+    <div class="container fade-in">
+      <p class="section-intro">一杯ずつ選びたい方へ</p>
+      <div class="single-list">
+        <a href="https://shirokumalab.base.shop/items/141939527" target="_blank" class="single-item">
+          <span class="item-name color-forme">for me.</span>
+          <span class="item-arrow">→</span>
+        </a>
+        <a href="https://shirokumalab.base.shop/items/141939824" target="_blank" class="single-item">
+          <span class="item-name color-unlearn">unlearn.</span>
+          <span class="item-arrow">→</span>
+        </a>
+        <a href="https://shirokumalab.base.shop/items/141940041" target="_blank" class="single-item">
+          <span class="item-name color-wonder">wonder.</span>
+          <span class="item-arrow">→</span>
+        </a>
+        <a href="https://shirokumalab.base.shop/items/141940644" target="_blank" class="single-item">
+          <span class="item-name color-now">now.</span>
+          <span class="item-arrow">→</span>
+        </a>
+        <a href="https://shirokumalab.base.shop/items/141940871" target="_blank" class="single-item">
+          <span class="item-name color-us">us.</span>
+          <span class="item-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ 思想導線 -->
+  <section id="philosophy">
+    <div class="container fade-in">
+      <p class="phil-label">この体験の背景にある考え方</p>
+      <h2 class="phil-title">「正解設計」</h2>
+      <p class="phil-desc">noteで発信しています</p>
+      <a href="https://note.com/p_kun614" target="_blank" class="btn">読む</a>
+    </div>
+  </section>
+
+  <!-- ⑧ クロージング -->
+  <section id="closing">
+    <div class="container fade-in">
+      <div class="closing-text">
+        <p>正解を選ぶ必要はない。</p>
+        <p>選んだあとに、<br>正解にしていけばいい。</p>
+        <p>その最初の一歩を、</p>
+        <p><strong>この一杯から。</strong></p>
+      </div>
+      <a href="https://shirokumalab.base.shop" target="_blank" class="btn">体験する</a>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <p>© シロクマファンタスティック</p>
+  </footer>
+
+  <script>
+    // スクロールアニメーション
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
